@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerForward : MonoBehaviour
 {
-    public WallTrigger FrontBoxL;
-    public WallTrigger FrontBoxR;
     public float speed = .6f;
     public Vector3 targetPosition;
+
+    public LayerMask mask;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,18 @@ public class PlayerForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FrontBoxL.frontIsOpen && FrontBoxR.frontIsOpen)
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hitInfu;
+
+        if ( Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore) )
+        {
+            Debug.DrawLine(ray.origin, hitInfu.point, Color.red);
+        } else
+        {
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
+        }
+        Debug.Log(hitInfu.distance);
+        if (hitInfu.distance >= 3f)
         {
             if (transform.position == targetPosition)
             {
