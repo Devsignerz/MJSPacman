@@ -6,6 +6,8 @@ public class PlayerRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rotateTarget %= 360;
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             rotateTarget -= 90f;
