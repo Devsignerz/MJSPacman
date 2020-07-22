@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class SeedScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject gameMode;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            ++gameMode.GetComponent<GameModeScript>().seedScore;
             Destroy(gameObject);
         }
     }
