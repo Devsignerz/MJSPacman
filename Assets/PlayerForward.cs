@@ -28,7 +28,6 @@ public class PlayerForward : MonoBehaviour
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
         }
-        Debug.Log(hitInfu.distance);
         if (hitInfu.distance >= 3f)
         {
             if (transform.position == targetPosition)
