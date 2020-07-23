@@ -59,7 +59,7 @@ public class MachibuseScript : MonoBehaviour
                     break;
 
                 case State.Chase:
-                    nextDir = FindShortestDirectionToTarget(PossibleDirections(), player.position + (player.forward * 4 * 3));
+                    nextDir = FindShortestDirectionToTarget(PossibleDirections(), player.position + (player.forward * 2 * 3));
                     break;
 
                 case State.Frigntened:
