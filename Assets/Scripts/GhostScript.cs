@@ -33,6 +33,9 @@ public class GhostScript : MonoBehaviour
     public float speed = .3f;
     public Vector3 target = Vector3.zero;
     public bool debugVisual = true;
+    public List<float> stateTimes1 = new List<float> {7f, 20f, 7f, 20f, 5f, 20f,     5.00f};
+    public List<float> stateTimes2 = new List<float> {7f, 20f, 7f, 20f, 5f, 1033.14f, .01f};
+    public List<float> stateTimes5 = new List<float> {5f, 20f, 5f, 20f, 5f, 1037.14f, .01f};
     // Start is called before the first frame update
     void Start()
     {
@@ -83,7 +86,9 @@ public class GhostScript : MonoBehaviour
             state = GhostState.Frigntened;
         if (Input.GetKeyDown(KeyCode.Alpha4))
             state = GhostState.Eaten;
-        //Debug.Log(name + " / " + state);
+
+        Debug.Log(stateRound + " / " + stateTimer + " / " + state);
+        StateScatterChaseTimerSwitcher();
     }
 
     private void FixedUpdate()
@@ -94,6 +99,32 @@ public class GhostScript : MonoBehaviour
                              speed);
     }
 
+    int stateRound = 0;
+    float stateTimer = 0f;
+    bool stateTimerRun = true;
+
+    void StateScatterChaseTimerSwitcher()
+    {
+        if (stateTimerRun)
+        {
+            stateTimer -= Time.deltaTime;
+            if (stateTimer <= 0)
+            {
+                if (stateRound >= 7)
+                {
+                    state = GhostState.Chase;
+                    stateTimerRun = false;
+                }
+
+                if (stateRound % 2 == 0)
+                    state = GhostState.Scatter;
+                else
+                    state = GhostState.Chase;
+                stateTimer = stateTimes1[stateRound];
+                ++stateRound;
+            }
+        }
+    }
 
     void FindNextStep()
     {

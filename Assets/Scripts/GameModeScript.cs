@@ -11,6 +11,7 @@ public class GameModeScript : MonoBehaviour
     public List<GameObject> Ghosts;
     public int seedScore = 0;
     public int maxScore = 0;
+    float timer = 0f;
 
 
     float ghostSpeed = .3f;
@@ -71,4 +72,6 @@ public class GameModeScript : MonoBehaviour
             ghost.GetComponent<GhostScript>().speed = ghostSpeed;
         }
     }
+
+
 }
