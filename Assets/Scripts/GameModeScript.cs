@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameModeScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    public Text scoreBoard;
     public List<GameObject> Ghosts;
     public int seedScore = 0;
+    public int maxScore = 0;
+
 
     float ghostSpeed = .3f;
 
@@ -20,6 +24,7 @@ public class GameModeScript : MonoBehaviour
     private void Update()
     {
         debugToggle();
+        scoreBoard.text = seedScore + " / " + maxScore;
     }
 
     void debugToggle()
