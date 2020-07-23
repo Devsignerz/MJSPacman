@@ -11,7 +11,7 @@ public class OikakeScript : MonoBehaviour
         Frigntened,
         Eaten,
     }
-    State state = State.Scatter;
+    State state = State.Chase;
     Vector3 targetPosition;
     Vector3 perviusStep = Vector3.forward;
     public Vector3 scatterTarget = new Vector3(24, 1, 35);
