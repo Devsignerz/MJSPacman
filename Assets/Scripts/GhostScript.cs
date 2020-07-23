@@ -21,6 +21,7 @@ public enum GhostType
 public class GhostScript : MonoBehaviour
 {
     Vector3 targetPosition;
+    Vector3 targetRotation = Vector3.zero;
     Vector3 perviusStep = Vector3.forward;
     public GhostState state = GhostState.Chase;
     public GhostType gtype = GhostType.Oikake;
@@ -31,6 +32,7 @@ public class GhostScript : MonoBehaviour
     public Vector3 homePos = new Vector3(0, 1, 8);
     public float speed = .3f;
     public Vector3 target = Vector3.zero;
+    public bool debugVisual = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class GhostScript : MonoBehaviour
                 break;
 
             case GhostType.Otoboke:
-                target = Vector3.Distance(transform.position, player.position) < 8 ? scatterTarget : player.position;
+                target = Vector3.Distance(transform.position, player.position) < 10 ? scatterTarget : player.position;
                 break;
 
             default:
@@ -70,7 +72,8 @@ public class GhostScript : MonoBehaviour
     {
         Target();
         FindNextStep();
-        DebugTarget();
+
+        if (debugVisual) DebugVisual();
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             state = GhostState.Scatter;
@@ -86,6 +89,9 @@ public class GhostScript : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, targetPosition, speed);
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+                             Quaternion.Euler(transform.rotation.x, targetRotation.y, transform.rotation.z),
+                             speed);
     }
 
 
@@ -115,6 +121,16 @@ public class GhostScript : MonoBehaviour
                 default:
                     break;
             }
+
+            if (nextDir == Vector3.forward)
+                targetRotation.y = 0f;
+            if (nextDir == Vector3.left)
+                targetRotation.y = -90f;
+            if (nextDir == Vector3.back)
+                targetRotation.y = 180f;
+            if (nextDir == Vector3.right)
+                targetRotation.y = 90f;
+
             targetPosition = PosDirMov(nextDir);
             perviusStep = nextDir;
         }
@@ -186,7 +202,7 @@ public class GhostScript : MonoBehaviour
     //    return (int)((from.x * from.x) + (to.y * to.y));
     //}
 
-    void DebugTarget()
+    void DebugVisual()
     {
         Color color = Color.white;
         int height = 1;
@@ -230,6 +246,7 @@ public class GhostScript : MonoBehaviour
         {
             Debug.DrawLine(transform.position, HitInfu(dir).point, color);
         }
+
     }
 
 }

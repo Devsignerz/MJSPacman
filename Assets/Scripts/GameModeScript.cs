@@ -9,7 +9,7 @@ public class GameModeScript : MonoBehaviour
     public List<GameObject> Ghosts;
     public int seedScore = 0;
 
-    float ghostSpeed = 3f;
+    float ghostSpeed = .3f;
 
     void Start()
     {
@@ -17,11 +17,53 @@ public class GameModeScript : MonoBehaviour
         GhostInit();
     }
 
+    private void Update()
+    {
+        debugToggle();
+    }
+
+    void debugToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            GhostScript GS = Ghosts[0].GetComponent<GhostScript>();
+            if (GS.debugVisual)
+                GS.debugVisual = false;
+            else
+                GS.debugVisual = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            GhostScript GS = Ghosts[1].GetComponent<GhostScript>();
+            if (GS.debugVisual)
+                GS.debugVisual = false;
+            else
+                GS.debugVisual = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            GhostScript GS = Ghosts[2].GetComponent<GhostScript>();
+            if (GS.debugVisual)
+                GS.debugVisual = false;
+            else
+                GS.debugVisual = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            GhostScript GS = Ghosts[3].GetComponent<GhostScript>();
+            if (GS.debugVisual)
+                GS.debugVisual = false;
+            else
+                GS.debugVisual = true;
+        }
+
+    }
+
     void GhostInit()
     {
         foreach (GameObject ghost in Ghosts)
         {
-
+            ghost.GetComponent<GhostScript>().speed = ghostSpeed;
         }
     }
 }
