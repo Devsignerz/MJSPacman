@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerForward : MonoBehaviour
 {
-    public float speed = .6f;
+    float speed = .6f;
     public Vector3 targetPosition;
 
     public LayerMask mask;
