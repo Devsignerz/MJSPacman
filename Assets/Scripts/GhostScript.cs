@@ -210,7 +210,7 @@ public class GhostScript : MonoBehaviour
         {
             case GhostType.Oikake:
                 color = Color.red;
-                height = 5;
+                height = 2;
                 break;
 
             case GhostType.Machibuse:
@@ -220,12 +220,12 @@ public class GhostScript : MonoBehaviour
 
             case GhostType.Kimagure:
                 color = Color.cyan;
-                height = 2;
+                height = 4;
                 break;
 
             case GhostType.Otoboke:
                 color = new Color(1f, .5f, 0f);
-                height = 4;
+                height = 5;
                 break;
 
             default:
@@ -239,6 +239,7 @@ public class GhostScript : MonoBehaviour
 
         Debug.DrawLine(from1, to1, color);
         Debug.DrawLine(from2, to2, color);
+        Debug.DrawLine(new Vector3(target.x, 0, target.z), target + (Vector3.up * height), color);
 
         List<Vector3> Directs = PossibleDirections();
 
