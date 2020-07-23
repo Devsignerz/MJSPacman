@@ -6,17 +6,22 @@ public class GameModeScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
-    public GameObject Oikake;
+    public List<GameObject> Ghosts;
     public int seedScore = 0;
+
+    float ghostSpeed = 3f;
 
     void Start()
     {
-    seedScore = 0;
+        seedScore = 0;
+        GhostInit();
     }
 
-    // Update is called once per frame
-    void Update()
+    void GhostInit()
     {
+        foreach (GameObject ghost in Ghosts)
+        {
 
+        }
     }
 }

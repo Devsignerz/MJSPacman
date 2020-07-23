@@ -2,43 +2,84 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KimagureScript : MonoBehaviour
+public enum GhostState
 {
-    enum State
-    {
-        Scatter,
-        Chase,
-        Frigntened,
-        Eaten,
-    }
-    State state = State.Chase;
+    Scatter,
+    Chase,
+    Frigntened,
+    Eaten,
+}
+
+public enum GhostType
+{
+    Oikake,
+    Machibuse,
+    Kimagure,
+    Otoboke
+}
+
+public class GhostScript : MonoBehaviour
+{
     Vector3 targetPosition;
     Vector3 perviusStep = Vector3.forward;
-    public Vector3 scatterTarget = new Vector3(24, 1, -34);
+    public GhostState state = GhostState.Chase;
+    public GhostType gtype = GhostType.Oikake;
+    public Vector3 scatterTarget = new Vector3(24, 1, 35);
     public LayerMask mask;
     public Transform player;
     public Transform oikake;
     public Vector3 homePos = new Vector3(0, 1, 8);
-    float speed = .6f;
+    public float speed = .3f;
+    public Vector3 target = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
         targetPosition = transform.position;
     }
 
+    void Target()
+    {
+        //Vector3 Target = transform.position;
+        switch (gtype)
+        {
+            case GhostType.Oikake:
+                target = player.position;
+                break;
+
+            case GhostType.Machibuse:
+                target = player.position + (player.forward * 2 * 3);
+                break;
+
+            case GhostType.Kimagure:
+                Vector3 PFP = player.position + (player.forward * 2 * 3);
+                target = PFP + (PFP - oikake.position);
+                break;
+
+            case GhostType.Otoboke:
+                target = Vector3.Distance(transform.position, player.position) < 8 ? scatterTarget : player.position;
+                break;
+
+            default:
+                target = transform.position;
+                break;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Target();
         FindNextStep();
+        DebugTarget();
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            state = State.Scatter;
+            state = GhostState.Scatter;
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            state = State.Chase;
+            state = GhostState.Chase;
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            state = State.Frigntened;
+            state = GhostState.Frigntened;
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            state = State.Eaten;
+            state = GhostState.Eaten;
         //Debug.Log(name + " / " + state);
     }
 
@@ -55,22 +96,19 @@ public class KimagureScript : MonoBehaviour
             Vector3 nextDir = Vector3.zero;
             switch (state)
             {
-                case State.Scatter:
+                case GhostState.Scatter:
                     nextDir = FindShortestDirectionToTarget(PossibleDirections(), scatterTarget);
                     break;
 
-                case State.Chase:
-                    Vector3 PFP = player.position + (player.forward * 2 * 3);
-                    Vector3 T = PFP + (PFP - oikake.position);
-                    Debug.Log(T);
-                    nextDir = FindShortestDirectionToTarget(PossibleDirections(), T);
+                case GhostState.Chase:
+                    nextDir = FindShortestDirectionToTarget(PossibleDirections(), target);
                     break;
 
-                case State.Frigntened:
+                case GhostState.Frigntened:
                     nextDir = RandomDirection(PossibleDirections());
                     break;
 
-                case State.Eaten:
+                case GhostState.Eaten:
                     nextDir = FindShortestDirectionToTarget(PossibleDirections(), new Vector3(0, 0, 8));
                     break;
 
@@ -91,7 +129,7 @@ public class KimagureScript : MonoBehaviour
         return possibilities[randomNumber];
     }
 
-    bool dirCheck(Vector3 Direction)
+    bool DirCheck(Vector3 Direction)
     {
         if (perviusStep != Direction * -1)
             if (HitInfu(Direction).distance >= 3f)
@@ -103,26 +141,23 @@ public class KimagureScript : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hitInfu;
-        if (Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore))
-            Debug.DrawLine(ray.origin, hitInfu.point, Color.red);
-        else
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
+        Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore);
         return hitInfu;
     }
 
     List<Vector3> PossibleDirections()
     {
         var possibleDirections = new List<Vector3>();
-        if (dirCheck(Vector3.forward))
+        if (DirCheck(Vector3.forward))
             possibleDirections.Add(Vector3.forward);
 
-        if (dirCheck(Vector3.left))
+        if (DirCheck(Vector3.left))
             possibleDirections.Add(Vector3.left);
 
-        if (dirCheck(Vector3.back))
+        if (DirCheck(Vector3.back))
             possibleDirections.Add(Vector3.back);
 
-        if (dirCheck(Vector3.right))
+        if (DirCheck(Vector3.right))
             possibleDirections.Add(Vector3.right);
         return possibleDirections;
     }
@@ -150,5 +185,51 @@ public class KimagureScript : MonoBehaviour
     //{
     //    return (int)((from.x * from.x) + (to.y * to.y));
     //}
+
+    void DebugTarget()
+    {
+        Color color = Color.white;
+        int height = 1;
+        switch (gtype)
+        {
+            case GhostType.Oikake:
+                color = Color.red;
+                height = 5;
+                break;
+
+            case GhostType.Machibuse:
+                color = new Color(1f, .5f, 1f);
+                height = 3;
+                break;
+
+            case GhostType.Kimagure:
+                color = Color.cyan;
+                height = 2;
+                break;
+
+            case GhostType.Otoboke:
+                color = new Color(1f, .5f, 0f);
+                height = 4;
+                break;
+
+            default:
+                color = Color.white;
+                break;
+        }
+        Vector3 from1 = target + Vector3.right + (Vector3.up * height);
+        Vector3 to1 = target + Vector3.left + (Vector3.up * height);
+        Vector3 from2 = target + Vector3.forward + (Vector3.up * height);
+        Vector3 to2 = target + Vector3.back + (Vector3.up * height);
+
+        Debug.DrawLine(from1, to1, color);
+        Debug.DrawLine(from2, to2, color);
+
+        List<Vector3> Directs = PossibleDirections();
+
+        foreach (Vector3 dir in Directs)
+        {
+            Debug.DrawLine(transform.position, HitInfu(dir).point, color);
+        }
+    }
 
 }
