@@ -9,9 +9,10 @@ public class GameModeScript : MonoBehaviour
     public GameObject player;
     public Text scoreBoard;
     public List<GameObject> Ghosts;
+    public AudioSource EatingCookiePlayer;
     public int seedScore = 0;
     public int maxScore = 0;
-    float timer = 0f;
+    float EatingCookieTimer = 0f;
 
 
     float ghostSpeed = .3f;
@@ -25,7 +26,12 @@ public class GameModeScript : MonoBehaviour
     private void Update()
     {
         debugToggle();
+        Debug.Log(EatingCookieTimer);
         scoreBoard.text = seedScore + " / " + maxScore;
+        if (EatingCookieTimer <= 0)
+            EatingCookiePlayer.Pause();
+        else
+            EatingCookieTimer -= Time.deltaTime;
     }
 
     void debugToggle()
@@ -73,5 +79,11 @@ public class GameModeScript : MonoBehaviour
         }
     }
 
-
+    int clipCount = 0;
+    public void EatingCookieSoundPlay()
+    {
+        EatingCookieTimer = 1f - player.GetComponent<PlayerForward>().speed;
+        if (!EatingCookiePlayer.isPlaying)
+            EatingCookiePlayer.Play();
+    }
 }

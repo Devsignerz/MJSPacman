@@ -87,7 +87,7 @@ public class GhostScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
             state = GhostState.Eaten;
 
-        Debug.Log(stateRound + " / " + stateTimer + " / " + state);
+        //Debug.Log(stateRound + " / " + stateTimer + " / " + state);
         StateScatterChaseTimerSwitcher();
     }
 
