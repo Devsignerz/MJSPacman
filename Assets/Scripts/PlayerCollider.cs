@@ -23,7 +23,6 @@ public class PlayerCollider : MonoBehaviour
         if (collider.CompareTag("Ghosts"))
         {
             SceneManager.LoadScene("Main");
-            Debug.Log("Hey");
         }
     }
 }
