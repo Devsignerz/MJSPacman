@@ -37,7 +37,6 @@ public class GameModeScript : MonoBehaviour
             Time.timeScale = 1;
         }
         debugToggle();
-        Debug.Log(EatingCookieTimer);
         scoreBoard.text = seedScore + " / " + maxScore;
         if (EatingCookieTimer <= 0)
             EatingCookiePlayer.Pause();
