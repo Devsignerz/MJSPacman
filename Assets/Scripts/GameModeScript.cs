@@ -14,10 +14,10 @@ public class GameModeScript : MonoBehaviour
     public List<GameObject> Ghosts;
     public AudioSource EatingCookiePlayer;
     public AudioSource MuiscPlayer;
-    public AudioClip normalMove;
     public int seedScore = 0;
     public int maxScore = 0;
     float EatingCookieTimer = 0f;
+    bool ghostAudio = false;
 
 
     float ghostSpeed = .3f;
@@ -32,19 +32,19 @@ public class GameModeScript : MonoBehaviour
     private void Update()
     {
         {
-        if (!MuiscPlayer.isPlaying)
-        {
-            Destroy(readyText);
-            MuiscPlayer.PlayOneShot(normalMove);
-            MuiscPlayer.loop = true;
-            Time.timeScale = 1;
-        }
-        if (EatingCookieTimer <= 0)
-            EatingCookiePlayer.Pause();
-        else
-            EatingCookieTimer -= Time.deltaTime;
+            if (!MuiscPlayer.isPlaying)
+            {
+                Destroy(readyText);
+                ghostAudio = true;
+                Time.timeScale = 1;
+            }
+            if (EatingCookieTimer <= 0)
+                EatingCookiePlayer.Pause();
+            else
+                EatingCookieTimer -= Time.deltaTime;
         }
         ScoreControler();
+        GhostAudioController();
         debugToggle();
     }
 
@@ -107,5 +107,20 @@ public class GameModeScript : MonoBehaviour
         highscoreBoard.text = PlayerPrefs.GetInt("HighScore").ToString();
         if (seedScore * 10 > PlayerPrefs.GetInt("HighScore"))
             PlayerPrefs.SetInt("HighScore", seedScore * 10);
+    }
+
+    void GhostAudioController()
+    {
+        foreach (GameObject ghost in Ghosts)
+            ghost.GetComponent<AudioSource>().volume = 0f;
+
+        GameObject closestGhost = Ghosts[0];
+        foreach (GameObject ghost in Ghosts)
+            if (Vector3.Distance(ghost.transform.position, player.transform.position) <
+                Vector3.Distance(closestGhost.transform.position, player.transform.position))
+                closestGhost = ghost;
+        if (ghostAudio)
+            closestGhost.GetComponent<AudioSource>().volume = 1f;
+
     }
 }
