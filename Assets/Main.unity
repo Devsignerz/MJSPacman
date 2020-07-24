@@ -13373,6 +13373,7 @@ GameObject:
   - component: {fileID: 1277354907}
   - component: {fileID: 1277354909}
   - component: {fileID: 1277354910}
+  - component: {fileID: 1277354911}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -13518,6 +13519,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 512
+  swipe: {fileID: 1277354911}
 --- !u!108 &1277354907
 Light:
   m_ObjectHideFlags: 0
@@ -13614,6 +13616,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4bad5c9196850549994cb526cc32a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1277354911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277354900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736983f50f5ea184ca5cc2379310f800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1278905255 stripped
