@@ -82,7 +82,7 @@ public class GameModeScript : MonoBehaviour
     int clipCount = 0;
     public void EatingCookieSoundPlay()
     {
-        EatingCookieTimer = 1f - player.GetComponent<PlayerForward>().speed;
+        EatingCookieTimer = .95f - player.GetComponent<PlayerForward>().speed;
         if (!EatingCookiePlayer.isPlaying)
             EatingCookiePlayer.Play();
     }
