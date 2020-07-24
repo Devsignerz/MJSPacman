@@ -31,10 +31,10 @@ public class GameModeScript : MonoBehaviour
     {
         if (!MuiscPlayer.isPlaying)
         {
+            Destroy(readyText);
             MuiscPlayer.PlayOneShot(normalMove);
             MuiscPlayer.loop = true;
             Time.timeScale = 1;
-            Destroy(readyText);
         }
         debugToggle();
         Debug.Log(EatingCookieTimer);
