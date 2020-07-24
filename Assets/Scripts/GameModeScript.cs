@@ -8,7 +8,9 @@ public class GameModeScript : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player;
     public GameObject readyText;
+    public Text seedBoard;
     public Text scoreBoard;
+    public Text highscoreBoard;
     public List<GameObject> Ghosts;
     public AudioSource EatingCookiePlayer;
     public AudioSource MuiscPlayer;
@@ -29,6 +31,7 @@ public class GameModeScript : MonoBehaviour
 
     private void Update()
     {
+        {
         if (!MuiscPlayer.isPlaying)
         {
             Destroy(readyText);
@@ -36,12 +39,13 @@ public class GameModeScript : MonoBehaviour
             MuiscPlayer.loop = true;
             Time.timeScale = 1;
         }
-        debugToggle();
-        scoreBoard.text = seedScore + " / " + maxScore;
         if (EatingCookieTimer <= 0)
             EatingCookiePlayer.Pause();
         else
             EatingCookieTimer -= Time.deltaTime;
+        }
+        ScoreControler();
+        debugToggle();
     }
 
     void debugToggle()
@@ -94,5 +98,14 @@ public class GameModeScript : MonoBehaviour
         EatingCookieTimer = .95f - player.GetComponent<PlayerForward>().speed;
         if (!EatingCookiePlayer.isPlaying)
             EatingCookiePlayer.Play();
+    }
+
+    void ScoreControler()
+    {
+        seedBoard.text = seedScore + " / " + maxScore;
+        scoreBoard.text = (seedScore * 10).ToString();
+        highscoreBoard.text = PlayerPrefs.GetInt("HighScore").ToString();
+        if (seedScore * 10 > PlayerPrefs.GetInt("HighScore"))
+            PlayerPrefs.SetInt("HighScore", seedScore * 10);
     }
 }
