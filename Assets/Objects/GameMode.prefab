@@ -53,11 +53,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   EatingCookiePlayer: {fileID: -1188870618888111221}
-  NormalMovePlayer: {fileID: -353873148838174860}
-  EatingCookieClips:
-  - {fileID: 8300000, guid: 63f072ee61a8be74b90e98afeac475d0, type: 3}
-  - {fileID: 8300000, guid: b274dc8acbc781049b634afc4a8705ec, type: 3}
-  - {fileID: 8300000, guid: 1eed4c26f764f8445b33cd80f2eaae86, type: 3}
+  MuiscPlayer: {fileID: -353873148838174860}
+  normalMove: {fileID: 8300000, guid: baafc1616c4cd8f4092a22d62562af1d, type: 3}
   seedScore: 0
   maxScore: 0
 --- !u!82 &-1188870618888111221
@@ -166,11 +163,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: baafc1616c4cd8f4092a22d62562af1d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 96a1bb44a7bcc0e4abef32fa1d37aee1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

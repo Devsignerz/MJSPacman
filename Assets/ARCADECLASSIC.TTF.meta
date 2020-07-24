@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 816f8dc9350291a42afc28996422ef29
+guid: 1a1424ebab33b004782cb79c46ad0131
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,8 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: PacFont
   fontNames:
-  - PacFont
+  - ArcadeClassic
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
