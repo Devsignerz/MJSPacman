@@ -51,13 +51,10 @@ public class GhostDirection : MonoBehaviour
             if (Vector3.Distance(MoveInDirection(item), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
                 shortestDirection = item;
 
-            //if (targetFinder.stateSwitcher.state == GhostState.Chase)
-            //{
-                if (Vector3.Distance(MoveInDirection(item) + new Vector3(-54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
-                    shortestDirection = item;
-                if (Vector3.Distance(MoveInDirection(item) + new Vector3(54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
-                    shortestDirection = item;
-            //}
+            if (Vector3.Distance(MoveInDirection(item) + new Vector3(-54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
+                shortestDirection = item;
+            if (Vector3.Distance(MoveInDirection(item) + new Vector3(54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
+                shortestDirection = item;
         }
         return shortestDirection;
     }
