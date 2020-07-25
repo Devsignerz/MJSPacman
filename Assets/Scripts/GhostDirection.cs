@@ -45,6 +45,8 @@ public class GhostDirection : MonoBehaviour
 
     Vector3 FindShortestDirectionToTarget(List<Vector3> possibilisies, Vector3 target)
     {
+        if (possibilisies.Count == 0)
+            return Vector3.zero;
         Vector3 shortestDirection = possibilisies[0];
         foreach (Vector3 item in possibilisies)
         {
@@ -56,6 +58,18 @@ public class GhostDirection : MonoBehaviour
             if (Vector3.Distance(MoveInDirection(item) + new Vector3(54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
                 shortestDirection = item;
         }
+        /*
+        for (int i = 0; i < possibilisies.Count; i++)
+        {
+            if (Vector3.Distance(MoveInDirection(possibilisies[i]), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
+                shortestDirection = possibilisies[i];
+
+            if (Vector3.Distance(MoveInDirection(possibilisies[i]) + new Vector3(-54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
+                shortestDirection = possibilisies[i];
+            if (Vector3.Distance(MoveInDirection(possibilisies[i]) + new Vector3(54f, 0f, 0f), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
+                shortestDirection = possibilisies[i];
+        }
+        */
         return shortestDirection;
     }
 
