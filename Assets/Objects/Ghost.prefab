@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793411c5acabcc24e845dbafcafb6cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myEyes: {fileID: 1691277732199367738}
   ghostLeft: {fileID: 8209685689293451007}
   ghostRight: {fileID: 4005063006314224140}
   direction: {fileID: 1863247794916841665}

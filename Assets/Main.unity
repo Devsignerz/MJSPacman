@@ -29255,7 +29255,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: baafc1616c4cd8f4092a22d62562af1d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -34151,10 +34151,15 @@ PrefabInstance:
       propertyPath: highscoreBoard
       value: 
       objectReference: {fileID: 1831662497}
+    - target: {fileID: 5422566466882763776, guid: 8cefcb85fe86fac41bae3e3f43344153,
+        type: 3}
+      propertyPath: alarmAudio
+      value: 
+      objectReference: {fileID: 1757099331}
     - target: {fileID: 5422566466882763777, guid: 8cefcb85fe86fac41bae3e3f43344153,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5422566466882763777, guid: 8cefcb85fe86fac41bae3e3f43344153,
         type: 3}
@@ -34164,7 +34169,7 @@ PrefabInstance:
     - target: {fileID: 5422566466882763777, guid: 8cefcb85fe86fac41bae3e3f43344153,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5422566466882763777, guid: 8cefcb85fe86fac41bae3e3f43344153,
         type: 3}

@@ -18,6 +18,8 @@ public class GameModeScript : MonoBehaviour
     public int seedScore = 0;
     public int maxScore = 0;
     float EatingCookieTimer = 0f;
+    float AlarmAudioTimer = 0f;
+    int GhostAlarmTurn = 0;
     bool ghostAudio = false;
 
 
@@ -45,7 +47,7 @@ public class GameModeScript : MonoBehaviour
                 EatingCookieTimer -= Time.deltaTime;
         }
         ScoreControler();
-        //GhostAudioController();
+        GhostAudioController();
     }
 
     void GhostInit()
@@ -74,16 +76,15 @@ public class GameModeScript : MonoBehaviour
 
     void GhostAudioController()
     {
-        foreach (GameObject ghost in Ghosts)
-            ghost.GetComponent<AudioSource>().volume = 0f;
+        if (AlarmAudioTimer <= 0)
+        {
+            ++GhostAlarmTurn;
+            GhostAlarmTurn %= Ghosts.Count;
+        }
+        else
+            AlarmAudioTimer -= Time.deltaTime;
 
-        GameObject closestGhost = Ghosts[0];
-        foreach (GameObject ghost in Ghosts)
-            if (Vector3.Distance(ghost.transform.position, player.transform.position) <
-                Vector3.Distance(closestGhost.transform.position, player.transform.position))
-                closestGhost = ghost;
-        if (ghostAudio)
-            closestGhost.GetComponent<AudioSource>().volume = 1f;
+
 
     }
 }
