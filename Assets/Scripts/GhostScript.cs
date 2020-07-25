@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GhostScript : MonoBehaviour
 {
+    public GameObject ghostLeft;
+    public GameObject ghostRight;
     public GhostDirection direction;
     public float speed = .1f;
     Vector3 nextPosition;
@@ -14,7 +16,11 @@ public class GhostScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Renderer>().material.SetColor("_Color", ColorChooser());
+        Color color = ColorChooser();
+        GetComponent<Renderer>().material.SetColor("_Color", color);
+        ghostLeft.GetComponent<Renderer>().material.SetColor("_Color", color);
+        ghostRight.GetComponent<Renderer>().material.SetColor("_Color", color);
+
         nextPosition = transform.position;
     }
 
@@ -25,6 +31,18 @@ public class GhostScript : MonoBehaviour
             nextDirecton = direction.FindNextDirection();
         if (transform.position == nextPosition)
             nextPosition = direction.MoveInDirection(nextDirecton);
+
+        if (transform.position.x <= -30)
+        {
+            transform.position += new Vector3(54f, 0f, 0f);
+            nextPosition.x += 54f;
+        }
+
+        if (transform.position.x >= 30)
+        {
+            transform.position += new Vector3(-54f, 0f, 0f);
+            nextPosition.x += -54f;
+        }
     }
 
     private void FixedUpdate()

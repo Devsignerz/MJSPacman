@@ -33,6 +33,18 @@ public class PlayerForward : MonoBehaviour
                 {
                     targetPosition += transform.forward * 3;
                 }
+
+        if (transform.position.x <= -30)
+        {
+            transform.position += new Vector3(54f, 0f, 0f);
+            targetPosition.x += 54f;
+        }
+            
+        if (transform.position.x >= 30)
+        {
+            transform.position += new Vector3(-54f, 0f, 0f);
+            targetPosition.x += -54f;
+        }
     }
 
     private void FixedUpdate()
