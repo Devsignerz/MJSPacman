@@ -25,6 +25,7 @@ public class GhostStateSwitcher : MonoBehaviour
     {
         StateScatterChaseTimerSwitcher();
         Debuging();
+        //Debug.Log(stateRound + " / " + state);
     }
 
     void StateScatterChaseTimerSwitcher()
