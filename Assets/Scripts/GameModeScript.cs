@@ -8,7 +8,6 @@ public class GameModeScript : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player;
     public GameObject readyText;
-    public GameObject alarmAudio;
     public Text seedBoard;
     public Text scoreBoard;
     public Text highscoreBoard;
@@ -76,15 +75,29 @@ public class GameModeScript : MonoBehaviour
 
     void GhostAudioController()
     {
-        if (AlarmAudioTimer <= 0)
+        if (ghostAudio)
         {
-            ++GhostAlarmTurn;
-            GhostAlarmTurn %= Ghosts.Count;
+            foreach (GameObject ghost in Ghosts)
+                ghost.GetComponent<AudioSource>().volume = 0;
+
+            if (AlarmAudioTimer <= 0)
+            {
+                ++GhostAlarmTurn;
+                GhostAlarmTurn %= Ghosts.Count;
+                AlarmAudioTimer = 1f;
+            }
+            else
+                AlarmAudioTimer -= Time.deltaTime;
+
+            GameObject closestGhost = Ghosts[0];
+            foreach (GameObject ghost in Ghosts)
+                if (Vector3.Distance(ghost.transform.position, player.transform.position) <
+                    Vector3.Distance(closestGhost.transform.position, player.transform.position))
+                    closestGhost = ghost;
+
+            //Ghosts[GhostAlarmTurn].GetComponent<AudioSource>().volume = 1;
+            closestGhost.GetComponent<AudioSource>().volume = 1;
+
         }
-        else
-            AlarmAudioTimer -= Time.deltaTime;
-
-
-
     }
 }
