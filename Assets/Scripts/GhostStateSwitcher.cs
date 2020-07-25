@@ -34,18 +34,18 @@ public class GhostStateSwitcher : MonoBehaviour
             stateTimer -= Time.deltaTime;
             if (stateTimer <= 0)
             {
-                if (stateRound >= 7)
-                {
-                    state = GhostState.Chase;
-                    stateTimerRun = false;
-                }
-
                 if (stateRound % 2 == 0)
                     state = GhostState.Scatter;
                 else
                     state = GhostState.Chase;
                 stateTimer = stateTimes1[stateRound];
                 ++stateRound;
+
+                if (stateRound >= 7)
+                {
+                    state = GhostState.Chase;
+                    stateTimerRun = false;
+                }
             }
         }
     }
