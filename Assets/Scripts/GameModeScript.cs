@@ -8,6 +8,7 @@ public class GameModeScript : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player;
     public GameObject readyText;
+    public GameObject alarmAudio;
     public Text seedBoard;
     public Text scoreBoard;
     public Text highscoreBoard;

@@ -8,7 +8,6 @@ public class GhostScript : MonoBehaviour
 {
     public GameObject ghostLeft;
     public GameObject ghostRight;
-    public GameObject alarmAudio;
     public GhostDirection direction;
     public float speed = .1f;
     Vector3 nextPosition;
