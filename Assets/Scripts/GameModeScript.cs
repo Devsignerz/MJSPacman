@@ -44,45 +44,7 @@ public class GameModeScript : MonoBehaviour
                 EatingCookieTimer -= Time.deltaTime;
         }
         ScoreControler();
-        GhostAudioController();
-        debugToggle();
-    }
-
-    void debugToggle()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            GhostScript GS = Ghosts[0].GetComponent<GhostScript>();
-            if (GS.debugVisual)
-                GS.debugVisual = false;
-            else
-                GS.debugVisual = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            GhostScript GS = Ghosts[1].GetComponent<GhostScript>();
-            if (GS.debugVisual)
-                GS.debugVisual = false;
-            else
-                GS.debugVisual = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            GhostScript GS = Ghosts[2].GetComponent<GhostScript>();
-            if (GS.debugVisual)
-                GS.debugVisual = false;
-            else
-                GS.debugVisual = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            GhostScript GS = Ghosts[3].GetComponent<GhostScript>();
-            if (GS.debugVisual)
-                GS.debugVisual = false;
-            else
-                GS.debugVisual = true;
-        }
-
+        //GhostAudioController();
     }
 
     void GhostInit()
