@@ -14,16 +14,11 @@ public enum GhostType
 public class GhostTargetFinder : MonoBehaviour
 {
     public GhostStateSwitcher stateSwitcher;
+    public GhostType gtype = GhostType.Oikake;
     public Transform player;
     public Transform oikakeForKimagure;
     public Vector3 scatterTarget = new Vector3(24, 1, 35);
     public Vector3 eatenTarget = new Vector3(0, 0, 8);
-
-    public List<List<int>> OikakeSeedLeft = new List<List<int>>
-    {
-        new List<int>{ 1,  2,  3,  6,  9,  12,  15,  19 },
-        new List<int>{ 20, 30, 40, 50, 60, 80,  100, 120 }
-    };
 
 
 
@@ -43,7 +38,7 @@ public class GhostTargetFinder : MonoBehaviour
 
     Vector3 GhostTypeTarget()
     {
-        switch (stateSwitcher.ghostColor.type)
+        switch (gtype)
         {
             case GhostType.Oikake:
                 return player.position;
@@ -65,7 +60,7 @@ public class GhostTargetFinder : MonoBehaviour
 
     public Vector3 Target()
     {
-        switch (stateSwitcher.ghostColor.state)
+        switch (stateSwitcher.state)
         {
             case GhostState.Scatter:
                 return scatterTarget;
@@ -90,7 +85,7 @@ public class GhostTargetFinder : MonoBehaviour
     {
         Color color = Color.white;
         int height = 1;
-        switch (stateSwitcher.ghostColor.type)
+        switch (gtype)
         {
             case GhostType.Oikake:
                 color = Color.red;

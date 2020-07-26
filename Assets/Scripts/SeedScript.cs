@@ -17,8 +17,7 @@ public class SeedScript : MonoBehaviour
         if (other.tag == "Player")
         {
             gameMode.GetComponent<GameModeScript>().EatingCookieSoundPlay();
-            ++gameMode.GetComponent<GameModeScript>().seedCounder;
-            gameMode.GetComponent<GameModeScript>().Score += 10;
+            ++gameMode.GetComponent<GameModeScript>().seedScore;
             Destroy(gameObject);
         }
     }

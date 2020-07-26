@@ -12,7 +12,7 @@ public enum GhostState
 
 public class GhostStateSwitcher : MonoBehaviour
 {
-    public GhostColorScript ghostColor;
+    public GhostState state = GhostState.Chase;
     public List<float> stateTimes1 = new List<float> { 7f, 20f, 7f, 20f, 5f, 20f, 5.00f };
     public List<float> stateTimes2 = new List<float> { 7f, 20f, 7f, 20f, 5f, 1033.14f, .01f };
     public List<float> stateTimes5 = new List<float> { 5f, 20f, 5f, 20f, 5f, 1037.14f, .01f };
@@ -23,12 +23,9 @@ public class GhostStateSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (ghostColor.state == GhostState.Frigntened || ghostColor.state == GhostState.Eaten)
-            FrigntenedEatenMode();
-        else
-            StateScatterChaseTimerSwitcher();
-
+        StateScatterChaseTimerSwitcher();
         Debuging();
+        //Debug.Log(stateRound + " / " + state);
     }
 
     void StateScatterChaseTimerSwitcher()
@@ -39,41 +36,30 @@ public class GhostStateSwitcher : MonoBehaviour
             if (stateTimer <= 0)
             {
                 if (stateRound % 2 == 0)
-                    ghostColor.state = GhostState.Scatter;
+                    state = GhostState.Scatter;
                 else
-                    ghostColor.state = GhostState.Chase;
+                    state = GhostState.Chase;
                 stateTimer = stateTimes1[stateRound];
                 ++stateRound;
 
                 if (stateRound >= 7)
                 {
-                    ghostColor.state = GhostState.Chase;
+                    state = GhostState.Chase;
                     stateTimerRun = false;
                 }
             }
         }
     }
 
-    void FrigntenedEatenMode()
-    {
-
-    }
-    
-    public void FrigntenedMode()
-    {
-        ghostColor.state = GhostState.Frigntened;
-        ghostColor.colorSetter();
-    }
-
     void Debuging()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            ghostColor.state = GhostState.Scatter;
+            state = GhostState.Scatter;
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            ghostColor.state = GhostState.Chase;
+            state = GhostState.Chase;
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            ghostColor.state = GhostState.Frigntened;
+            state = GhostState.Frigntened;
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            ghostColor.state = GhostState.Eaten;
+            state = GhostState.Eaten;
     }
 }
