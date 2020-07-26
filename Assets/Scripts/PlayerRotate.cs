@@ -22,11 +22,6 @@ public class PlayerRotate : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || swipe.SwipeDown)
             if (RotateOpenCheck(-transform.forward))
                 rotateTarget += 180f;
-
-        if (swipe.SwipeLeft)
-            Debug.Log("Swipe Left!");
-            
-
     }
     void FixedUpdate()
     {
@@ -39,8 +34,7 @@ public class PlayerRotate : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, Direction);
         RaycastHit hitInfu;
-        if (Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore))
-            Debug.DrawLine(ray.origin, hitInfu.point, Color.yellow);
+        Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore);
         if (hitInfu.distance <= 3f)
             return false;
         return true;

@@ -21,21 +21,6 @@ public class GhostTargetFinder : MonoBehaviour
     public Vector3 eatenTarget = new Vector3(0, 0, 8);
 
 
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            if (debugVisual)
-                debugVisual = false;
-            else
-                debugVisual = true;
-        if (debugVisual) DebugVisual();
-    }
-
     Vector3 GhostTypeTarget()
     {
         switch (gtype)
@@ -78,54 +63,4 @@ public class GhostTargetFinder : MonoBehaviour
                 return transform.position;
         }
     }
-
-    public bool debugVisual = true;
-
-    void DebugVisual()
-    {
-        Color color = Color.white;
-        int height = 1;
-        switch (gtype)
-        {
-            case GhostType.Oikake:
-                color = Color.red;
-                height = 2;
-                break;
-
-            case GhostType.Machibuse:
-                color = new Color(1f, .5f, 1f);
-                height = 3;
-                break;
-
-            case GhostType.Kimagure:
-                color = Color.cyan;
-                height = 4;
-                break;
-
-            case GhostType.Otoboke:
-                color = new Color(1f, .5f, 0f);
-                height = 5;
-                break;
-
-            default:
-                color = Color.white;
-                break;
-        }
-        Vector3 from1 = Target() + Vector3.right + (Vector3.up * height);
-        Vector3 to1 = Target() + Vector3.left + (Vector3.up * height);
-        Vector3 from2 = Target() + Vector3.forward + (Vector3.up * height);
-        Vector3 to2 = Target() + Vector3.back + (Vector3.up * height);
-
-        Debug.DrawLine(from1, to1, color);
-        Debug.DrawLine(from2, to2, color);
-        Debug.DrawLine(new Vector3(Target().x, 0, Target().z), Target() + (Vector3.up * height), color);
-
-        //List<Vector3> Directs = PossibleDirections();
-
-        //foreach (Vector3 dir in Directs)
-        //{
-            //Debug.DrawLine(transform.position, HitInfu(dir).point, color);
-        //}
-    }
-
 }

@@ -24,8 +24,6 @@ public class GhostStateSwitcher : MonoBehaviour
     void Update()
     {
         StateScatterChaseTimerSwitcher();
-        Debuging();
-        //Debug.Log(stateRound + " / " + state);
     }
 
     void StateScatterChaseTimerSwitcher()
@@ -49,17 +47,5 @@ public class GhostStateSwitcher : MonoBehaviour
                 }
             }
         }
-    }
-
-    void Debuging()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            state = GhostState.Scatter;
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            state = GhostState.Chase;
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            state = GhostState.Frigntened;
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            state = GhostState.Eaten;
     }
 }
