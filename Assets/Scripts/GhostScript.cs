@@ -26,10 +26,14 @@ public class GhostScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.rotation.y == nextDirecton.y)
-            nextDirecton = direction.FindNextDirection();
         if (transform.position == nextPosition)
+        {
+            nextDirecton = direction.FindNextDirection();
             nextPosition = direction.MoveInDirection(nextDirecton);
+        }
+
+
+        if (transform.position == nextPosition)
 
             if (transform.position.x <= -30)
             {

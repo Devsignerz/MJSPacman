@@ -71,7 +71,8 @@ public class GhostDirection : MonoBehaviour
 
     bool DirCheck(Vector3 Direction)
     {
-        if (step != Direction * -1)
+
+        if (Direction != step * -1)
             if (HitInfu(Direction).distance >= 3f)
                 return true;
         return false;
