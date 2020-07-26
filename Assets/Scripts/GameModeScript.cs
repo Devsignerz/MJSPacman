@@ -14,11 +14,10 @@ public class GameModeScript : MonoBehaviour
     public List<GameObject> Ghosts;
     public AudioSource EatingCookiePlayer;
     public AudioSource MuiscPlayer;
-    public int seedScore = 0;
+    public int seedCounder = 0;
+    public int Score = 0;
     public int maxScore = 0;
     float EatingCookieTimer = 0f;
-    float AlarmAudioTimer = 0f;
-    int GhostAlarmTurn = 0;
     bool ghostAudio = false;
 
 
@@ -27,7 +26,7 @@ public class GameModeScript : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0;
-        seedScore = 0;
+        seedCounder = 0;
         GhostInit();
     }
 
@@ -66,11 +65,11 @@ public class GameModeScript : MonoBehaviour
 
     void ScoreControler()
     {
-        seedBoard.text = seedScore + " / " + maxScore;
-        scoreBoard.text = (seedScore * 10).ToString();
+        seedBoard.text = seedCounder + " / " + maxScore;
+        scoreBoard.text = (seedCounder * 10).ToString();
         highscoreBoard.text = PlayerPrefs.GetInt("HighScore").ToString();
-        if (seedScore * 10 > PlayerPrefs.GetInt("HighScore"))
-            PlayerPrefs.SetInt("HighScore", seedScore * 10);
+        if (seedCounder * 10 > PlayerPrefs.GetInt("HighScore"))
+            PlayerPrefs.SetInt("HighScore", seedCounder * 10);
     }
 
     void GhostAudioController()
@@ -79,15 +78,6 @@ public class GameModeScript : MonoBehaviour
         {
             foreach (GameObject ghost in Ghosts)
                 ghost.GetComponent<AudioSource>().volume = 0;
-
-            if (AlarmAudioTimer <= 0)
-            {
-                ++GhostAlarmTurn;
-                GhostAlarmTurn %= Ghosts.Count;
-                AlarmAudioTimer = 1f;
-            }
-            else
-                AlarmAudioTimer -= Time.deltaTime;
 
             GameObject closestGhost = Ghosts[0];
             foreach (GameObject ghost in Ghosts)
@@ -99,5 +89,12 @@ public class GameModeScript : MonoBehaviour
             closestGhost.GetComponent<AudioSource>().volume = 1;
 
         }
+    }
+
+    public void FrigntenedActivated()
+    {
+        foreach (GameObject ghost in Ghosts)
+            ghost.GetComponent<GhostStateSwitcher>().FrigntenedMode();
+            //ghost.GetComponent<GhostColorScript>().state = GhostState.Frigntened;
     }
 }

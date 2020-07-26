@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedScript : MonoBehaviour
+public class PowerUpsScript : MonoBehaviour
 {
     public GameObject gameMode;
 
@@ -18,7 +18,8 @@ public class SeedScript : MonoBehaviour
         {
             gameMode.GetComponent<GameModeScript>().EatingCookieSoundPlay();
             ++gameMode.GetComponent<GameModeScript>().seedCounder;
-            gameMode.GetComponent<GameModeScript>().Score += 10;
+            gameMode.GetComponent<GameModeScript>().Score += 50;
+            gameMode.GetComponent<GameModeScript>().FrigntenedActivated();
             Destroy(gameObject);
         }
     }
