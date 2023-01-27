@@ -1,2 +1,2 @@
 # MJSPacman
- My version of Pacman
+A fork of MJSPacman aimed to be ported to PS Vita
