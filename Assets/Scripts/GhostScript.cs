@@ -4,11 +4,10 @@ using UnityEngine;
 
 
 
-public class GhostScript : MonoBehaviour
-{
-    public Transform myEyes;
-    public GameObject ghostLeft;
-    public GameObject ghostRight;
+public class GhostScript : MonoBehaviour{
+    //public Transform myEyes;
+    //public GameObject ghostLeft;
+    //public GameObject ghostRight;
     public GhostDirection direction;
     public float speed = .1f;
     Vector3 nextRotation = Vector3.zero;
@@ -16,21 +15,18 @@ public class GhostScript : MonoBehaviour
     Vector3 nextPosition;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         Color color = ColorChooser();
         GetComponent<Renderer>().material.SetColor("_Color", color);
-        ghostLeft.GetComponent<Renderer>().material.SetColor("_Color", color);
-        ghostRight.GetComponent<Renderer>().material.SetColor("_Color", color);
+        //ghostLeft.GetComponent<Renderer>().material.SetColor("_Color", color);
+        //ghostRight.GetComponent<Renderer>().material.SetColor("_Color", color);
 
         nextPosition = transform.position;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (transform.position == nextPosition)
-        {
+    void Update(){
+        if (transform.position == nextPosition){
             nextDirecton = direction.FindNextDirection();
             nextPosition = direction.MoveInDirection(nextDirecton);
         }
@@ -38,14 +34,12 @@ public class GhostScript : MonoBehaviour
 
         if (transform.position == nextPosition)
 
-        if (transform.position.x <= -30)
-        {
+        if (transform.position.x <= -30){
             transform.position += new Vector3(54f, 0f, 0f);
             nextPosition.x += 54f;
         }
 
-        if (transform.position.x >= 30)
-        {
+        if (transform.position.x >= 30){
             transform.position += new Vector3(-54f, 0f, 0f);
             nextPosition.x += -54f;
         }
@@ -60,21 +54,19 @@ public class GhostScript : MonoBehaviour
             nextRotation.y = 90f;
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate(){
         transform.position = Vector3.Lerp(transform.position, nextPosition, speed);
-        myEyes.localRotation = Quaternion.Lerp(myEyes.localRotation,
+        /*myEyes.localRotation = Quaternion.Lerp(myEyes.localRotation,
                              Quaternion.Euler(transform.rotation.x, nextRotation.y, transform.rotation.z),
-                             speed);
+                             speed);*/
     }
 
-    Color ColorChooser()
-    {
+	//sets enemy color
+    Color ColorChooser(){
         if (direction.targetFinder.stateSwitcher.state == GhostState.Frigntened)
             return Color.blue;
 
-        switch (direction.targetFinder.gtype)
-        {
+        switch (direction.targetFinder.gtype){
             case GhostType.Oikake:
                 return Color.red;
 

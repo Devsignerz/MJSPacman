@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostDirection : MonoBehaviour
-{
+public class GhostDirection : MonoBehaviour{
     public GhostTargetFinder targetFinder;
     public LayerMask mask;
     Vector3 step = Vector3.zero;

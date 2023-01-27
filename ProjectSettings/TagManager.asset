@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Walls
-  - Ghosts
+  - ghost
+  - seed
   layers:
   - Default
   - TransparentFX
@@ -15,12 +16,12 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - Walls
-  - Seeds
-  - Lights
-  - Ghosts
-  - Player
+  - enemy
+  - env
+  - player
+  - seed
+  - 
+  - 
   - 
   - 
   - 
