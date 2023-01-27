@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 public class GhostScript : MonoBehaviour{
-    //public Transform myEyes;
+    public Transform myEyes;
     //public GameObject ghostLeft;
     //public GameObject ghostRight;
     public GhostDirection direction;
@@ -26,14 +26,16 @@ public class GhostScript : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+		//find and go to next position
         if (transform.position == nextPosition){
             nextDirecton = direction.FindNextDirection();
             nextPosition = direction.MoveInDirection(nextDirecton);
         }
 
 
-        if (transform.position == nextPosition)
+        //if (transform.position == nextPosition)
 
+		//teleport if on the edge
         if (transform.position.x <= -30){
             transform.position += new Vector3(54f, 0f, 0f);
             nextPosition.x += 54f;
@@ -44,6 +46,7 @@ public class GhostScript : MonoBehaviour{
             nextPosition.x += -54f;
         }
 
+		//find next rotation
         if (nextDirecton == Vector3.forward)
             nextRotation.y = 0f;
         if (nextDirecton == Vector3.left)
@@ -55,10 +58,11 @@ public class GhostScript : MonoBehaviour{
     }
 
     private void FixedUpdate(){
+		//smooth rotation
         transform.position = Vector3.Lerp(transform.position, nextPosition, speed);
-        /*myEyes.localRotation = Quaternion.Lerp(myEyes.localRotation,
-                             Quaternion.Euler(transform.rotation.x, nextRotation.y, transform.rotation.z),
-                             speed);*/
+        myEyes.localRotation =	Quaternion.Lerp(myEyes.localRotation,
+								Quaternion.Euler(transform.rotation.x, nextRotation.y, transform.rotation.z),
+								speed);
     }
 
 	//sets enemy color

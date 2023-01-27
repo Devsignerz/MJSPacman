@@ -8,13 +8,11 @@ public class GhostDirection : MonoBehaviour{
     Vector3 step = Vector3.zero;
 
 
-    public Vector3 MoveInDirection(Vector3 dirction)
-    {
+    public Vector3 MoveInDirection(Vector3 dirction){
         return transform.position + (dirction * 3);
     }
 
-    public Vector3 FindNextDirection()
-    {
+    public Vector3 FindNextDirection(){
         if (targetFinder.Target() != transform.position)
             step = FindShortestDirectionToTarget(PossibleDirections(), targetFinder.Target());
         else
@@ -23,8 +21,7 @@ public class GhostDirection : MonoBehaviour{
         return step;
     }
 
-    List<Vector3> PossibleDirections()
-    {
+    List<Vector3> PossibleDirections(){
         var possibleDirections = new List<Vector3>();
 
         if (DirCheck(Vector3.forward))
@@ -42,13 +39,11 @@ public class GhostDirection : MonoBehaviour{
         return possibleDirections;
     }
 
-    Vector3 FindShortestDirectionToTarget(List<Vector3> possibilisies, Vector3 target)
-    {
+    Vector3 FindShortestDirectionToTarget(List<Vector3> possibilisies, Vector3 target){
         if (possibilisies.Count == 0)
             return Vector3.zero;
         Vector3 shortestDirection = possibilisies[0];
-        foreach (Vector3 item in possibilisies)
-        {
+        foreach (Vector3 item in possibilisies){
             if (Vector3.Distance(MoveInDirection(item), target) < Vector3.Distance(MoveInDirection(shortestDirection), target))
                 shortestDirection = item;
 
@@ -60,16 +55,14 @@ public class GhostDirection : MonoBehaviour{
         return shortestDirection;
     }
 
-    RaycastHit HitInfu(Vector3 direction)
-    {
+    RaycastHit HitInfu(Vector3 direction){
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hitInfu;
         Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore);
         return hitInfu;
     }
 
-    bool DirCheck(Vector3 Direction)
-    {
+    bool DirCheck(Vector3 Direction){
 
         if (Direction != step * -1)
             if (HitInfu(Direction).distance >= 3f)
@@ -77,8 +70,7 @@ public class GhostDirection : MonoBehaviour{
         return false;
     }
 
-    Vector3 RandomDirection(List<Vector3> possibilities)
-    {
+    Vector3 RandomDirection(List<Vector3> possibilities){
         int randomNumber = Random.Range(0, possibilities.Count);
         return possibilities[randomNumber];
     }
