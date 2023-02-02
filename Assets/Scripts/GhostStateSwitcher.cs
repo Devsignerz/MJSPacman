@@ -19,18 +19,14 @@ public class GhostStateSwitcher : MonoBehaviour{
     bool stateTimerRun = true;
 
 
-    void Update()
-    {
+    void Update(){
         StateScatterChaseTimerSwitcher();
     }
 
-    void StateScatterChaseTimerSwitcher()
-    {
-        if (stateTimerRun)
-        {
+    void StateScatterChaseTimerSwitcher(){
+        if (stateTimerRun){
             stateTimer -= Time.deltaTime;
-            if (stateTimer <= 0)
-            {
+            if (stateTimer <= 0){
                 if (stateRound % 2 == 0)
                     state = GhostState.Scatter;
                 else
@@ -38,8 +34,7 @@ public class GhostStateSwitcher : MonoBehaviour{
                 stateTimer = stateTimes1[stateRound];
                 ++stateRound;
 
-                if (stateRound >= 7)
-                {
+                if (stateRound >= 7){
                     state = GhostState.Chase;
                     stateTimerRun = false;
                 }
