@@ -9,4 +9,4 @@
 8 up
 9 left
 10 down
-11 rights
+11 right

@@ -51,15 +51,15 @@ public class PlayerController : MonoBehaviour{
 		////rotation////
 		rotateTarget %= 360;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if(Input.GetKeyDown(KeyCode.JoystickButton9))
             if (RotateOpenCheck(-transform.right))
                 rotateTarget -= 90f;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.JoystickButton11))
             if (RotateOpenCheck(transform.right))
                 rotateTarget += 90f;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if(Input.GetKeyDown(KeyCode.JoystickButton10))
             if (RotateOpenCheck(-transform.forward))
                 rotateTarget += 180f;
     }

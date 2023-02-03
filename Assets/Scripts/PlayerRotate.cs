@@ -1,37 +1,32 @@
 ﻿using UnityEngine;
 
-public class PlayerRotate : MonoBehaviour
-{
+public class PlayerRotate : MonoBehaviour{
     public float speed = .6f;
     public float rotateTarget = 0f;
     public LayerMask mask;
-    public Swipe swipe;
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         rotateTarget %= 360;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || swipe.SwipeLeft)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
             if (RotateOpenCheck(-transform.right))
                 rotateTarget -= 90f;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || swipe.SwipeRight)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             if (RotateOpenCheck(transform.right))
                 rotateTarget += 90f;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || swipe.SwipeDown)
+        if (Input.GetKeyDown(KeyCode.DownArrow))
             if (RotateOpenCheck(-transform.forward))
                 rotateTarget += 180f;
     }
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
         transform.rotation = Quaternion.Lerp(transform.rotation,
             Quaternion.Euler(transform.rotation.x, rotateTarget, transform.rotation.z),
             speed);
     }
 
-    bool RotateOpenCheck(Vector3 Direction)
-    {
+    bool RotateOpenCheck(Vector3 Direction){
         Ray ray = new Ray(transform.position, Direction);
         RaycastHit hitInfu;
         Physics.Raycast(ray, out hitInfu, 100f, mask, QueryTriggerInteraction.Ignore);
