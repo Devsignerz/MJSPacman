@@ -8,14 +8,15 @@ public class GameModeScript : MonoBehaviour{
     public Text seedBoard;
     public Text scoreBoard;
     public List<GameObject> Ghosts;
-    public AudioSource EatingCookiePlayer;
-    public AudioSource MusicPlayer;
+    public AudioClip EatingCookiePlayer;
+    public AudioClip MusicPlayer;
     public int seedScore;
     public int maxScore;
     float EatingCookieTimer = 0f;
 
     void Start(){
 		//reset everything and initiate ghosts
+		GetComponent<AudioSource>().clip = MusicPlayer;
         Time.timeScale = 0;
         seedScore = 0;
         GhostInit();
@@ -23,14 +24,9 @@ public class GameModeScript : MonoBehaviour{
 
     private void Update(){{
 			//set everything back to normal when start game sound finishes playing
-            if (!MusicPlayer.isPlaying){
+            if (!GetComponent<AudioSource>().isPlaying){
                 Time.timeScale = 1;
             }
-			//pause the sound if some kind of timer hits zero
-            if (EatingCookieTimer <= 0)
-                EatingCookiePlayer.Pause();
-            else
-                EatingCookieTimer -= Time.deltaTime;
         }
         ScoreControler();
         //GhostAudioController();
@@ -47,9 +43,8 @@ public class GameModeScript : MonoBehaviour{
     }
 
     public void EatingCookieSoundPlay(){
-        EatingCookieTimer = .95f - player.GetComponent<PlayerController>().speed;
-        if (!EatingCookiePlayer.isPlaying)
-            EatingCookiePlayer.Play();
+		GetComponent<AudioSource>().clip = EatingCookiePlayer;
+		GetComponent<AudioSource>().Play();
     }
 
 	//set collected seed amount, score, and highscore
