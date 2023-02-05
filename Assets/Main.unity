@@ -15722,7 +15722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myEyes: {fileID: 1303750341}
   direction: {fileID: 1303750336}
-  speed: 0.1
+  speed: 0.3
 --- !u!114 &1303750336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15757,8 +15757,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.14
-  MaxDistance: 6.3
+  MinDistance: 0.9
+  MaxDistance: 22.73
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -16393,8 +16393,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
-  MaxDistance: 5.46
+  MinDistance: 0.9
+  MaxDistance: 22.73
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -16605,7 +16605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myEyes: {fileID: 1345516094}
   direction: {fileID: 1345516097}
-  speed: 0.1
+  speed: 0.3
 --- !u!114 &1345516097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18835,7 +18835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myEyes: {fileID: 1557454854}
   direction: {fileID: 1557454849}
-  speed: 0.1
+  speed: 0.3
 --- !u!114 &1557454849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18870,8 +18870,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
-  MaxDistance: 5.46
+  MinDistance: 0.9
+  MaxDistance: 22.73
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -23199,7 +23199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myEyes: {fileID: 2006075371}
   direction: {fileID: 2006075366}
-  speed: 0.1
+  speed: 0.3
 --- !u!114 &2006075366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23234,8 +23234,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
-  MaxDistance: 5.46
+  MinDistance: 0.9
+  MaxDistance: 22.73
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -9,7 +9,7 @@ public enum GhostState{
 }
 
 public class GhostStateSwitcher : MonoBehaviour{
-    public GhostState state = GhostState.Chase;
+    public GhostState state = GhostState.Scatter;
     public List<float> stateTimes1 = new List<float> { 7f, 20f, 7f, 20f, 5f, 20f, 5.00f };
     public List<float> stateTimes2 = new List<float> { 7f, 20f, 7f, 20f, 5f, 1033.14f, .01f };
     public List<float> stateTimes5 = new List<float> { 5f, 20f, 5f, 20f, 5f, 1037.14f, .01f };
